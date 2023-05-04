@@ -1,0 +1,27 @@
+name: Train Model
+description: Trains, cross-validates, and gathers feature importance of the model
+
+inputs:
+- {name: input file, type: String, optional: false, description: 'Input file to be processed'}
+
+outputs:
+- {name: epa graph output, type: String, description: 'File path of rendered EPA graph'}
+- {name: most important features, type: String, description: 'List of the Most Important Features to EPA'}
+
+implementation:
+  container:
+    image: registry.internal.magiccityit.com/wp-model-train
+    # command is a list of strings (command-line arguments).
+    # The YAML language has two syntaxes for lists and you can use either of them.
+    # Here we use the "flow syntax" - comma-separated strings inside square brackets.
+    command: [
+      python3,
+      # Path of the program inside the container
+      /pipelines/component/src/train-model.py,
+      --input-file-path,
+      {inputValue: input file},
+      --epa-graph-output,
+      {outputPath: epa graph output}
+      --feature-graph-output,
+      {outputPath: most important features}
+    ]
