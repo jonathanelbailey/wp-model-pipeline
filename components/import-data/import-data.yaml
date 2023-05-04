@@ -18,7 +18,7 @@ implementation:
     command: [
       python3,
       # Path of the program inside the container
-      /pipelines/component/src/train-model.py,
+      /pipelines/component/src/import-data.py,
       --starting-season,
       {inputValue: starting season},
       --ending-season,
