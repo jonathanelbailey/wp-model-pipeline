@@ -5,8 +5,6 @@ from pathlib import Path
 import nfl_data_py as nfl
 import pandas as pd
 
-data.to_csv('data/pbp_data.csv', index=False)
-
 # Defining and parsing the command-line arguments
 parser = argparse.ArgumentParser(description='Download file from public HTTP/S URL')
 # Paths must be passed in, not hardcoded
