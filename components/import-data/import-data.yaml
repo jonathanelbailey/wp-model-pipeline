@@ -18,7 +18,7 @@ implementation:
     command: [
       python3,
       # Path of the program inside the container
-      /pipelines/component/src/import-data.py,
+      /pipelines/components/src/import-data.py,
       --starting-season,
       {inputValue: starting season},
       --ending-season,

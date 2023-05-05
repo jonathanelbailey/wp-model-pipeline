@@ -8,6 +8,6 @@ RUN pip3 install -r requirements.txt
 
 WORKDIR /pipelines/components/src
 
-COPY ./src .
+COPY src/. .
 
 CMD ["python3"]
