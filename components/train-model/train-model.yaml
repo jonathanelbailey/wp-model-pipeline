@@ -17,7 +17,7 @@ implementation:
     command: [
       python3,
       # Path of the program inside the container
-      /pipelines/component/src/train-model.py,
+      /pipelines/components/src/train-model.py,
       --input-file-path,
       {inputValue: input file},
       --epa-graph-output,
