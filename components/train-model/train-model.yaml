@@ -19,7 +19,7 @@ implementation:
       # Path of the program inside the container
       /pipelines/components/src/train-model.py,
       --input-file-path,
-      {inputValue: input file},
+      {inputPath: input file},
       --epa-graph-output,
       {outputPath: epa graph output},
       --feature-graph-output,
