@@ -26,14 +26,14 @@ parser.add_argument('--input-file-path',
                     type=str,
                     required=True,
                     help='Path of the file to be processed.')
-parser.add_argument('--preprocessed-data-path',
-                    type=str,
-                    required=True,
-                    help='Path of the preprocessed data output.')
 parser.add_argument('--epa-graph-output',
                     type=str,
                     required=True,
                     help='Path of the rendered EPA Average Graph.')
+parser.add_argument('--feature-graph-output',
+                    type=str,
+                    required=True,
+                    help='Path of the rendered Features Graph')
 args = parser.parse_args()
 
 print('Input arguments:')
@@ -41,13 +41,13 @@ print(args)
 
 # Creating the directory where the output file is created (the directory
 # may or may not exist).
-preprocessed_data_output_dir = Path(args.preprocessed_data_path).parent
 epa_graph_output_dir = Path(args.epa_graph_output).parent
+feature_graph_output_dir = Path(args.preprocessed_data_path).parent
 
 try:
-    preprocessed_data_output_dir.mkdir(parents=True, exist_ok=True)
+    feature_graph_output_dir.mkdir(parents=True, exist_ok=True)
 except Exception as ex:
-    raise RuntimeError(f'Error creating output directory {preprocessed_data_output_dir}: {ex}')
+    raise RuntimeError(f'Error creating output directory {feature_graph_output_dir}: {ex}')
 
 try:
     epa_graph_output_dir.mkdir(parents=True, exist_ok=True)
@@ -110,4 +110,4 @@ accuracy_scores, model_accuracy, log_losses, neg_log_loss = get_accuracy_scores(
 
 feature_fig = plot_most_important_features(features, clf)
 
-feature_fig.savefig('data/features.svg', format='svg', dpi=1200)
+feature_fig.savefig(args.feature_graph_output, format='svg', dpi=1200)
