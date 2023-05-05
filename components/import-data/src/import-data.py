@@ -9,11 +9,11 @@ import pandas as pd
 parser = argparse.ArgumentParser(description='Download file from public HTTP/S URL')
 # Paths must be passed in, not hardcoded
 parser.add_argument('--starting-season',
-                    type=str,
+                    type=int,
                     required=True,
                     help='Beginning of the range of seasons to import')
 parser.add_argument('--ending-season',
-                    type=str,
+                    type=int,
                     required=True,
                     help='End of the range of seasons to import')
 parser.add_argument('--table-output-path',
@@ -32,7 +32,7 @@ try:
 except Exception as ex:
     raise RuntimeError(f'Error creating output directory {output_dir}: {ex}')
 
-data = pd.concat([nfl.import_pbp_data(range(args.starting_season, args.ending_season))])
+data = nfl.import_pbp_data(range(args.starting_season, args.ending_season))
 nfl.clean_nfl_data(data)
 data.head()
 try:

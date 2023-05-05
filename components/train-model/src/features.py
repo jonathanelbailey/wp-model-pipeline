@@ -1,6 +1,4 @@
-import pandas as pd
 from matplotlib import pyplot as plt
-import matplotlib.ticker as plticker
 import numpy as np
 from sklearn.model_selection import cross_val_score
 from sklearn.linear_model import LogisticRegression

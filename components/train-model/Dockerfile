@@ -1,13 +1,11 @@
-FROM python:3.7-alpine
+FROM python:3.9
 LABEL authors="Jonathan Bailey"
 
-RUN apk add  --no-cache --update alpine-sdk cargo snappy-dev
-
 COPY requirements.txt .
-RUN pip3 install -r requirements.txt
+RUN pip3 install -r requirements.txt --no-cache-dir
 
 WORKDIR /pipelines/components/src
 
-COPY ./src .
+COPY src/. .
 
 CMD ["python3"]

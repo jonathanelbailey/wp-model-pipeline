@@ -1,5 +1,5 @@
 name: Train Model
-description: Trains, cross-validates, and gathers feature importance of the model
+description: gathers feature importance of the model
 
 inputs:
 - {name: input file, type: String, optional: false, description: 'Input file to be processed'}
