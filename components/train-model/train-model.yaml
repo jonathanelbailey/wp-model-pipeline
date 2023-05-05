@@ -21,7 +21,7 @@ implementation:
       --input-file-path,
       {inputValue: input file},
       --epa-graph-output,
-      {outputPath: epa graph output}
+      {outputPath: epa graph output},
       --feature-graph-output,
       {outputPath: most important features}
     ]
