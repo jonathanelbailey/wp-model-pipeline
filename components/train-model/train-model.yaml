@@ -10,7 +10,7 @@ outputs:
 
 implementation:
   container:
-    image: registry.internal.magiccityit.com/wp-model-train
+    image: registry.internal.magiccityit.com/wp-model-train:latest
     # command is a list of strings (command-line arguments).
     # The YAML language has two syntaxes for lists and you can use either of them.
     # Here we use the "flow syntax" - comma-separated strings inside square brackets.
