@@ -2,9 +2,9 @@ name: Import Data
 description: Imports Data From nflfastR repositories
 
 inputs:
-- {name: starting season, type: String, optional: false, description: 'Starting Season.  Used as: range({start}:{end})'}
+- {name: starting season, type: Integer, optional: false, description: 'Starting Season.  Used as: range({start}:{end})'}
 
-- {name: ending season, type: String, optional: false, description: 'Ending Season.  Used as: range({start}:{end})'}
+- {name: ending season, type: Integer, optional: false, description: 'Ending Season.  Used as: range({start}:{end})'}
 
 outputs:
 - {name: table output, type: String, description: 'Contents of the Imported Data'}
