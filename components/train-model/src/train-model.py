@@ -121,7 +121,7 @@ accuracy_scores, model_accuracy, log_losses, neg_log_loss = get_accuracy_scores(
 
 feature_fig = plot_most_important_features(features, clf)
 
-feature_fig.savefig(args.feature_output_path, format='svg', dpi=1200)
+feature_fig.savefig(args.feature_graph_output, format='svg', dpi=1200)
 
 metadata = {
     'outputs': [{
