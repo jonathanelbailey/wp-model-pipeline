@@ -26,5 +26,5 @@ implementation:
       --feature-graph-output,
       {outputPath: feature graph output},
       --ui-metadata-output-path,
-      {outputPath: MLPipeline UI metadata}
+      {outputPath: mlpipeline ui metadata}
     ]
