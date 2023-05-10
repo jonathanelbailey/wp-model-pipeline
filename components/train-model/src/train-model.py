@@ -4,6 +4,7 @@ import argparse
 from pathlib import Path
 import pandas as pd
 import json
+from joblib import dump
 from epa import (
     get_epa,
     lag_epa_one_period,
@@ -39,6 +40,10 @@ parser.add_argument('--ui-metadata-output-path',
                     type=str,
                     required=True,
                     help='Path of the rendered Features Graph')
+parser.add_argument('--model-output-path',
+                    type=str,
+                    required=True,
+                    help='Path of the rendered Features Graph')
 args = parser.parse_args()
 
 print('Input arguments:')
@@ -49,11 +54,17 @@ print(args)
 epa_graph_output_dir = Path(args.epa_graph_output).parent
 feature_graph_output_dir = Path(args.feature_graph_output).parent
 ui_metadata_output_dir = Path(args.ui_metadata_output_path).parent
+model_output_dir = Path(args.model_output_path).parent
 
 try:
     ui_metadata_output_dir.mkdir(parents=True, exist_ok=True)
 except Exception as ex:
     raise RuntimeError(f'Error creating output directory {ui_metadata_output_dir}: {ex}')
+
+try:
+    model_output_dir.mkdir(parents=True, exist_ok=True)
+except Exception as ex:
+    raise RuntimeError(f'Error creating output directory {model_output_dir}: {ex}')
 
 try:
     epa_graph_output_dir.mkdir(parents=True, exist_ok=True)
@@ -117,6 +128,7 @@ features = get_most_important_features(df)
 
 X, y, clf = get_data_with_features(df, '2022', features, 'home_team_win')
 
+dump(clf, args.model_output_path)
 accuracy_scores, model_accuracy, log_losses, neg_log_loss = get_accuracy_scores(X, y, clf, 10, 'neg_log_loss')
 
 feature_fig = plot_most_important_features(features, clf)
@@ -127,9 +139,6 @@ metadata = {
     'outputs': [{
         'type': 'web-app',
         'source': args.feature_graph_output,
-    }, {
-        'type': 'web-app',
-        'source': args.epa_graph_output,
     }]
 }
 

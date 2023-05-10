@@ -7,6 +7,7 @@ inputs:
 outputs:
 - {name: epa graph output, type: String, description: 'File path of rendered EPA graph'}
 - {name: feature graph output, type: String, description: 'File path of rendered Feature graph'}
+- {name: model output, type: String, description: 'File path of model'}
 - {name: mlpipeline ui metadata, type: UI Metadata}
 
 implementation:
@@ -26,5 +27,7 @@ implementation:
       --feature-graph-output,
       {outputPath: feature graph output},
       --ui-metadata-output-path,
-      {outputPath: mlpipeline ui metadata}
+      {outputPath: mlpipeline ui metadata},
+      --model-output-path,
+      { outputPath: model output }
     ]
