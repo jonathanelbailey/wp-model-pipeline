@@ -6,7 +6,7 @@ inputs:
 
 outputs:
 - {name: epa graph output, type: String, description: 'File path of rendered EPA graph'}
-- - {name: feature graph output, type: String, description: 'File path of rendered Feature graph'}
+- {name: feature graph output, type: String, description: 'File path of rendered Feature graph'}
 - {name: MLPipeline UI metadata, type: UI metadata}
 
 implementation:
