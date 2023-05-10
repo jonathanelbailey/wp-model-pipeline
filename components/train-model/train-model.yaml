@@ -6,7 +6,8 @@ inputs:
 
 outputs:
 - {name: epa graph output, type: String, description: 'File path of rendered EPA graph'}
-- {name: most important features, type: String, description: 'List of the Most Important Features to EPA'}
+- - {name: feature graph output, type: String, description: 'File path of rendered Feature graph'}
+- {name: MLPipeline UI metadata, type: UI metadata}
 
 implementation:
   container:
@@ -23,5 +24,7 @@ implementation:
       --epa-graph-output,
       {outputPath: epa graph output},
       --feature-graph-output,
-      {outputPath: most important features}
+      {outputPath: feature graph output}
+      --ui-metadata-output-path,
+      {outputPath: MLPipeline UI metadata}
     ]

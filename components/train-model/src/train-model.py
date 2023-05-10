@@ -3,6 +3,7 @@
 import argparse
 from pathlib import Path
 import pandas as pd
+import json
 from epa import (
     get_epa,
     lag_epa_one_period,
@@ -33,6 +34,10 @@ parser.add_argument('--epa-graph-output',
 parser.add_argument('--feature-graph-output',
                     type=str,
                     required=True,
+                    help='Path of the rendered EPA Average Graph.')
+parser.add_argument('--ui-metadata-output-path',
+                    type=str,
+                    required=True,
                     help='Path of the rendered Features Graph')
 args = parser.parse_args()
 
@@ -42,21 +47,27 @@ print(args)
 # Creating the directory where the output file is created (the directory
 # may or may not exist).
 epa_graph_output_dir = Path(args.epa_graph_output).parent
-feature_graph_output_dir = Path(args.preprocessed_data_path).parent
+feature_graph_output_dir = Path(args.feature_graph_output).parent
+ui_metadata_output_dir = Path(args.ui_metadata_output_path).parent
 
 try:
-    feature_graph_output_dir.mkdir(parents=True, exist_ok=True)
+    ui_metadata_output_dir.mkdir(parents=True, exist_ok=True)
 except Exception as ex:
-    raise RuntimeError(f'Error creating output directory {feature_graph_output_dir}: {ex}')
+    raise RuntimeError(f'Error creating output directory {ui_metadata_output_dir}: {ex}')
 
 try:
     epa_graph_output_dir.mkdir(parents=True, exist_ok=True)
 except Exception as ex:
     raise RuntimeError(f'Error creating output directory {epa_graph_output_dir}: {ex}')
 
+try:
+    feature_graph_output_dir.mkdir(parents=True, exist_ok=True)
+except Exception as ex:
+    raise RuntimeError(f'Error creating output directory {feature_graph_output_dir}: {ex}')
+
 data = pd.read_csv(args.input_file_path)
 print("CSV HEAD:\n")
-data.head()
+print(data.head())
 
 # seperate EPA in to rushing offense, rushing defense, passing offense, passing defense for each team
 rushing_offense_epa = get_epa(data, 'posteam', 'rush_attempt')
@@ -97,7 +108,7 @@ epa = epa.reset_index(drop=True)
 df = get_schedule(data, epa)
 
 print("Preprocessed data HEAD:\n")
-df.head()
+print(df.head())
 
 fig = plot_epa(epa, 'LA')
 fig.savefig(args.epa_graph_output, format='svg', dpi=1200)
@@ -110,4 +121,19 @@ accuracy_scores, model_accuracy, log_losses, neg_log_loss = get_accuracy_scores(
 
 feature_fig = plot_most_important_features(features, clf)
 
-feature_fig.savefig(args.feature_graph_output, format='svg', dpi=1200)
+feature_fig.savefig(args.feature_output_path, format='svg', dpi=1200)
+
+metadata = {
+    'outputs': [{
+        'type': 'web-app',
+        'storage': 'gcs',
+        'source': args.feature_output_path,
+    }, {
+        'type': 'web-app',
+        'storage': 'gcs',
+        'source': args.epa_output_path,
+    }]
+}
+
+with open(args.ui_metadata_output_path, 'w') as metadata_file:
+    json.dump(metadata, metadata_file)

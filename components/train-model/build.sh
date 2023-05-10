@@ -6,4 +6,4 @@ tag=$3
 
 docker build . -t $image_name:$tag
 docker image tag $image_name $registry/$image_name:$tag
-docker push $registry/$image_name:$tags
+docker push $registry/$image_name:$tag
