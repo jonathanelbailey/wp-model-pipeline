@@ -5,9 +5,9 @@ inputs:
 - {name: input file, type: String, optional: false, description: 'Input file to be processed'}
 
 outputs:
-- {name: epa graph output, type: String, description: 'File path of rendered EPA graph'}
-- {name: feature graph output, type: String, description: 'File path of rendered Feature graph'}
-- {name: MLPipeline UI metadata, type: UI metadata}
+- {name: epa graph output, type: String, description: 'File path of rendered EPA graph', path: /tmp/epa.svg}
+- {name: feature graph output, type: String, description: 'File path of rendered Feature graph', path: /tmp/feature.svg}
+- {name: mlpipeline ui metadata, path: /mlpipeline-ui-metadata.json}
 
 implementation:
   container:
