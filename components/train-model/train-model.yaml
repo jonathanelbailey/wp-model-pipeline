@@ -24,7 +24,7 @@ implementation:
       --epa-graph-output,
       {outputPath: epa graph output},
       --feature-graph-output,
-      {outputPath: feature graph output}
+      {outputPath: feature graph output},
       --ui-metadata-output-path,
       {outputPath: MLPipeline UI metadata}
     ]
