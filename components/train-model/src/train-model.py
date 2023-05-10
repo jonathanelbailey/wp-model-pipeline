@@ -126,11 +126,9 @@ feature_fig.savefig(args.feature_graph_output, format='svg', dpi=1200)
 metadata = {
     'outputs': [{
         'type': 'web-app',
-        'storage': 'gcs',
         'source': args.feature_graph_output,
     }, {
         'type': 'web-app',
-        'storage': 'gcs',
         'source': args.epa_graph_output,
     }]
 }
