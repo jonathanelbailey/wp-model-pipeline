@@ -127,11 +127,11 @@ metadata = {
     'outputs': [{
         'type': 'web-app',
         'storage': 'gcs',
-        'source': args.feature_output_path,
+        'source': args.feature_graph_output,
     }, {
         'type': 'web-app',
         'storage': 'gcs',
-        'source': args.epa_output_path,
+        'source': args.epa_graph_output,
     }]
 }
 
