@@ -1,4 +1,0 @@
-nfl_data_py
-pandas
-numpy
-matplotlib

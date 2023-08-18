@@ -1,6 +1,8 @@
-nfl_data_py
 pandas
-numpy
-matplotlib
 scikit-learn
-jinja2
+matplotlib
+nfl-data-py
+numpy<=1.23.5
+seaborn
+xgboost
+bayesian-optimization
